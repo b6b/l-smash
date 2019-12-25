@@ -49,6 +49,7 @@ install: all install-lib
 install-lib: liblsmash.pc lib
 	install -d $(DESTDIR)$(includedir)
 	install -m 644 $(SRCDIR)/lsmash.h $(DESTDIR)$(includedir)
+	install -m 644 $(SRCDIR)/importer/importer.h $(DESTDIR)$(includedir)/lsmash_importer.h
 	install -d $(DESTDIR)$(libdir)/pkgconfig
 	install -m 644 liblsmash.pc $(DESTDIR)$(libdir)/pkgconfig
 ifneq ($(STATICLIB),)
@@ -73,7 +74,7 @@ endif
 
 #All objects should be deleted regardless of configure when uninstall/clean/distclean.
 uninstall:
-	$(RM) $(DESTDIR)$(includedir)/lsmash.h
+	$(RM) $(addprefix $(DESTDIR)$(includedir)/, lsmash.h, lsmash_importer.h)
 	$(RM) $(addprefix $(DESTDIR)$(libdir)/, liblsmash.a liblsmash.dll.a liblsmash.so* liblsmash.dylib liblsmash*.def pkgconfig/liblsmash.pc)
 	$(RM) $(addprefix $(DESTDIR)$(bindir)/, $(TOOLS_ALL) $(TOOLS_ALL:%=%.exe) liblsmash*.dll lsmash.lib cyglsmash.dll)
 
